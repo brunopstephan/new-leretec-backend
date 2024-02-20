@@ -1,11 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common'
+import { TestRepository } from './repositories/test-repository'
 
 @Controller()
 export class AppController {
-  constructor() {}
+  constructor(private testRepository: TestRepository) {}
 
   @Get()
-  getHello(): string {
-    return 'a';
+  async getHello(): Promise<string> {
+    await this.testRepository.create('a')
+
+    return 'foi'
   }
 }

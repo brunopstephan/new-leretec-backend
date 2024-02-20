@@ -11,3 +11,8 @@ datasource db {
 }
 
 //rodar npx prisma migrate dev quando fazer os schemas
+model Teste {
+  id    String @id
+  name  String
+
+}
