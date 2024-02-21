@@ -14,5 +14,40 @@ datasource db {
 model Teste {
   id    String @id
   name  String
-
 }
+
+model AwaitingStories {
+  id           String @id
+  title        String
+  description  String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now())
+  sender       String
+  sender_email String
+}
+
+model Stories {
+  id           String @id
+  title        String
+  description  String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @default(now())
+  sender       String
+  sender_email String
+  adminId      String
+  admin        Admin @relation(fields: [adminId], references: [id])
+}
+
+model Admin {
+  id       String @id
+  name     String
+  email    String @unique
+  password String
+  Stories  Stories[]	
+}
+
+//awaiting_stories: id (pk), title, description, created_at, updated_at, sender, sender_email
+
+//approved_stories: id (pk)(id do awaiting), title, description, created_at, updated_at, sender, sender_email, id_admin(fk)
+
+//admin: id (pk), name, email, password
